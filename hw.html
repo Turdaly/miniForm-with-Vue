@@ -48,7 +48,7 @@
           </div>
           <div class="">
             <div class="form-group" v-for="guest, i in guests">
-              <label>Guest {{ i + 1}}</label>
+              <label  @dblclick="removeGuest(i)">Guest {{ i + 1}}</label>
               <input
                 v-model.trim="guests[i]"
                 type="text"
@@ -118,7 +118,7 @@
             this.guests.push(" ");
           },
           removeGuest(i) {
-            this.guest.splice(i, 1);
+            this.guests.splice(i, 1);
           },
           sendForm() {
             this.formDone = true;
