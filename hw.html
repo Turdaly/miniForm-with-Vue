@@ -14,7 +14,12 @@
         <form v-if="!formDone" @submit.prevent="sendForm">
           <div class="form-group">
             <label>Email</label>
-            <input v-model.trim="user.email" type="text" class="form-control" />
+            <input
+              v-model.trim="user.email"
+              type="text"
+              class="form-control"
+              ref="firstInp"
+            />
           </div>
           <div class="form-group">
             <label>Phone</label>
@@ -48,7 +53,7 @@
           </div>
           <div class="">
             <div class="form-group" v-for="guest, i in guests">
-              <label  @dblclick="removeGuest(i)">Guest {{ i + 1}}</label>
+              <label @dblclick="removeGuest(i)">Guest {{ i + 1}}</label>
               <input
                 v-model.trim="guests[i]"
                 type="text"
@@ -122,8 +127,11 @@
           },
           sendForm() {
             this.formDone = true;
-            this.guests = this.guests.filter(g => g.length > 0);
+            this.guests = this.guests.filter((g) => g.length > 0);
           },
+        },
+        mounted() {
+          this.$refs.firstInp.focus();
         },
       }).mount(".sample");
     </script>
