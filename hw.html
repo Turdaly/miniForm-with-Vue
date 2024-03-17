@@ -55,7 +55,7 @@
             <div class="form-group" v-for="guest, i in guests">
               <label @dblclick="removeGuest(i)">Guest {{ i + 1}}</label>
               <input
-                v-model.trim="guests[i]"
+                v-model.trim="guest.value"
                 type="text"
                 class="form-control"
               />
@@ -63,7 +63,6 @@
           </div>
           <hr />
           <button
-            @click="sendForm()"
             class="btn btn-success"
             :disabled="!formReady"
           >
@@ -90,7 +89,7 @@
 
               <td>
                 <ul v-for="guest in guests" class="list-group">
-                  <li class="list-group-item">{{ guest }}</li>
+                  <li class="list-group-item">{{ guest.value }}</li>
                 </ul>
               </td>
             </tr>
@@ -120,14 +119,14 @@
         },
         methods: {
           addGuest() {
-            this.guests.push(" ");
+            this.guests.push({ value: "" });
           },
           removeGuest(i) {
             this.guests.splice(i, 1);
           },
           sendForm() {
             this.formDone = true;
-            this.guests = this.guests.filter((g) => g.length > 0);
+            this.guests = this.guests.filter((g) => g.value.length > 0);
           },
         },
         mounted() {
